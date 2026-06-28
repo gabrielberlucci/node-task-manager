@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    /* Target & Modules */
+    "target": "ES2022" /* Modern JS features supported by Node.js lts */,
+    "module": "Node16" /* Matches modern Node module resolution rules */,
+    "moduleResolution": "Node16",
+
+    /* Build Outputs */
+    "outDir": "./dist" /* Destination folder for compiled JavaScript */,
+    "rootDir": "./src" /* Folder containing your TypeScript source code */,
+
+    /* Strict Type-Checking */
+    "strict": true /* Enables all strict type-checking options */,
+    "noImplicitAny": true /* Error on expressions with an implied 'any' type */,
+    "strictNullChecks": true /* Ensures null/undefined are handled correctly */,
+
+    /* Interoperability & Optimization */
+    "esModuleInterop": true /* Allows 'import express from "express"' smoothly */,
+    "skipLibCheck": true /* Skip type checking of declaration files (.d.ts) */,
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to files */,
+    "resolveJsonModule": true /* Permits importing JSON files directly */,
+
+    /* Path */
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+  },
+  "include": ["src/**/*"] /* Files to include in compilation */,
+  "exclude": ["node_modules", "dist"] /* Folders to skip */,
+}
