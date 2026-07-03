@@ -28,7 +28,7 @@ export const getStaticCpuInfo = async (): Promise<CpuStaticData | null> => {
   if (!cpuModel) throw new HardwareInfoError('Error while fetching CPU model.');
 
   const exec = promisify(child_process.exec);
-  const command = `powershell.exe -NoProfile -Command "Get-CimInstance -ClassName Win32_Processor | Select L2CacheSize,L3CacheSize,NumberOfEnabledCore,VirtualizationFirmwareEnabled | ConvertTo-Json"`;
+  const command = `powershell.exe -NoProfile -Command "$proc = Get-CimInstance -ClassName Win32_Processor | Select L2CacheSize,L3CacheSize,NumberOfEnabledCore,VirtualizationFirmwareEnabled; $cache = Get-CimInstance -ClassName Win32_CacheMemory | Where-Object {$_.level -eq 3} | Select -First 1 InstalledSize; $combined = [PSCustomObject]@{ L2CacheSize = $proc.L2CacheSize; L3CacheSize = $proc.L3CacheSize; NumberOfEnabledCore = $proc.NumberOfEnabledCore; VirtualizationFirmwareEnabled = $proc.VirtualizationFirmwareEnabled; InstalledSize = $cache.InstalledSize }; $combined | ConvertTo-Json"`;
 
   const { stdout, stderr } = await exec(command);
 
@@ -41,9 +41,9 @@ export const getStaticCpuInfo = async (): Promise<CpuStaticData | null> => {
 
   const cpuStaticInfo: CpuStaticData = {
     ...parsed,
-    cpuModel,
     numberOfLogicalProcessors,
     cpuBaseSpeed: `${Number(cpuBaseSpeed) / 1000} Ghz`,
+    L1CacheSize: `${Number(parsed.InstalledSize ?? 0)} KB`,
     L2CacheSize: `${Number(parsed.L2CacheSize ?? 0) / KB} MB`,
     L3CacheSize: `${Number(parsed.L3CacheSize ?? 0) / KB} MB`,
   } as CpuStaticData;
