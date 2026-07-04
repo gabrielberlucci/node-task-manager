@@ -1,1 +1,5 @@
-export { cpuController } from './cpu.controller';
+export {
+  cpuController,
+  cpuUptimeController,
+  cpuUsageController,
+} from './cpu.controller';

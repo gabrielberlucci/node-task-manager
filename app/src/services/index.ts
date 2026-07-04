@@ -1,1 +1,1 @@
-export { getStaticCpuInfo, getCpuUptime } from './cpu.service';
+export { getStaticCpuInfo, getCpuUptime, getCpuUsage } from './cpu.service';

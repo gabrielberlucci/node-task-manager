@@ -3,7 +3,8 @@ import { promisify } from 'node:util';
 import os from 'node:os';
 import child_process from 'node:child_process';
 import { CpuStaticData } from '@/types';
-
+import { setTimeout } from 'node:timers/promises';
+import { getCpuTimes } from '@/utils';
 const KB = 1024;
 
 let cachedCpuStaticInfo: CpuStaticData | null = null;
@@ -73,4 +74,25 @@ export const getCpuUptime = () => {
   };
 
   return timeData;
+};
+
+export const getCpuUsage = async () => {
+  const {
+    totalCpuTime: firstCpuTime,
+    totalActiveCpuTime: firstTotalActiveCpuTime,
+  } = getCpuTimes();
+
+  await setTimeout(1000);
+
+  const {
+    totalCpuTime: secondCpuTime,
+    totalActiveCpuTime: secondTotalActiveCpuTime,
+  } = getCpuTimes();
+
+  const totalDelta = secondCpuTime - firstCpuTime;
+  const activeDelta = secondTotalActiveCpuTime - firstTotalActiveCpuTime;
+
+  const total = `${((activeDelta / totalDelta) * 100).toFixed(2)}%`;
+
+  return total;
 };
