@@ -52,3 +52,25 @@ export const getStaticCpuInfo = async (): Promise<CpuStaticData | null> => {
 
   return cachedCpuStaticInfo;
 };
+
+export const getCpuUptime = () => {
+  let ut_sec = os.uptime();
+  let ut_min = ut_sec / 60;
+  let ut_hour = ut_min / 60;
+
+  ut_sec = Math.floor(ut_sec);
+  ut_min = Math.floor(ut_min);
+  ut_hour = Math.floor(ut_hour);
+
+  ut_hour = ut_hour % 60;
+  ut_min = ut_min % 60;
+  ut_sec = ut_sec % 60;
+
+  const timeData = {
+    hour: ut_hour,
+    minutes: ut_min,
+    seconds: ut_sec,
+  };
+
+  return timeData;
+};
