@@ -1,4 +1,9 @@
-import { getCpuUptime, getCpuUsage, getStaticCpuInfo } from '@/services';
+import {
+  getCpuTotalProcesses,
+  getCpuUptime,
+  getCpuUsage,
+  getStaticCpuInfo,
+} from '@/services';
 import type { Request, Response } from 'express';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 
@@ -28,6 +33,19 @@ export const cpuUsageController = async (_req: Request, res: Response) => {
   res.status(StatusCodes.OK).send({
     status: ReasonPhrases.OK,
     message: 'CPU usage fetched with success.',
+    data: data,
+  });
+};
+
+export const cpuProcessesTotalController = async (
+  _req: Request,
+  res: Response,
+) => {
+  const data = await getCpuTotalProcesses();
+
+  res.status(StatusCodes.OK).send({
+    status: ReasonPhrases.OK,
+    message: 'CPU total processes fetched with success.',
     data: data,
   });
 };

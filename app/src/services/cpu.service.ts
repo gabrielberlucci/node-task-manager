@@ -1,4 +1,4 @@
-import { HardwareInfoError } from '@/errors';
+import { HardwareInfoError, ProcessesInfoError } from '@/errors';
 import { promisify } from 'node:util';
 import os from 'node:os';
 import child_process from 'node:child_process';
@@ -95,4 +95,19 @@ export const getCpuUsage = async () => {
   const total = `${((activeDelta / totalDelta) * 100).toFixed(2)}%`;
 
   return total;
+};
+
+export const getCpuTotalProcesses = async () => {
+  const exec = promisify(child_process.exec);
+  const command = `powershell.exe -NoProfile -Command "$procs = Get-Process; [PSCustomObject]@{TotalProcesses = $procs.Count; TotalThreads = ($procs | Select-Object -ExpandProperty Threads).Count; TotalHandles = ($procs | Measure-Object -Property Handles -Sum).Sum} | ConvertTo-Json"`;
+
+  const { stdout, stderr } = await exec(command);
+
+  if (stderr) {
+    throw new ProcessesInfoError('Error while fetching processes');
+  }
+
+  const parsed = JSON.parse(stdout);
+
+  return parsed;
 };
