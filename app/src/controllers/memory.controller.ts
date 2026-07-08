@@ -10,7 +10,7 @@ export const getMemoryInformationController = async (
 
   res.status(StatusCodes.OK).send({
     status: ReasonPhrases.OK,
-    message: 'Total memory fetched with success.',
+    message: 'Memory information fetched with success.',
     data: data,
   });
 };
