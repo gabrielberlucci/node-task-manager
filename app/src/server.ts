@@ -12,5 +12,7 @@ app.use(routes);
 app.use(validateErrors);
 
 app.listen(port, () => {
-  console.log(`Task Manager is running on port ${port}`);
+  console.log(
+    `You can access the Task Manager by clicking the link(or copy to open in your browser) -> http://localhost:3000`,
+  );
 });
