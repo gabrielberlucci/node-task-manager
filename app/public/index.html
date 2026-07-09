@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task Manager - Monitor</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="app-container">
+            <header class="header">
+                <h1>System Monitor</h1>
+                <div class="status">
+                    <span class="pulse"></span>
+                    <span>Live Stream</span>
+                </div>
+            </header>
+
+            <main class="dashboard">
+                <div class="cards-grid">
+                    <div class="card glass-panel">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-content">
+                            <h3>CPU Usage</h3>
+                            <p id="cpu-usage" class="value">0%</p>
+                        </div>
+                    </div>
+
+                    <div class="card glass-panel">
+                        <div class="card-icon">🧠</div>
+                        <div class="card-content">
+                            <h3>Memory Usage</h3>
+                            <p id="memory-usage" class="value">0%</p>
+                            <p id="memory-details" class="subtitle">
+                                0 GB / 0 GB
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card glass-panel">
+                        <div class="card-icon">⏱️</div>
+                        <div class="card-content">
+                            <h3>System Uptime</h3>
+                            <p id="uptime" class="value">00:00:00</p>
+                        </div>
+                    </div>
+
+                    <div class="card glass-panel">
+                        <div class="card-icon">⚙️</div>
+                        <div class="card-content">
+                            <h3>Total Processes</h3>
+                            <p id="total-processes" class="value">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="hardware-section glass-panel">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem;">
+                    <h2>CPU Specifications</h2>
+                    <span id="cpu-name" style="color: #38bdf8; font-size: 0.9rem; font-weight: 600;"></span>
+                </div>
+                <div class="specs-grid" id="cpu-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Logical Cores</span
+                            ><span class="spec-value" id="spec-cores">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Base Speed</span
+                            ><span class="spec-value" id="spec-speed">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">L1 Cache</span
+                            ><span class="spec-value" id="spec-l1">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">L2 Cache</span
+                            ><span class="spec-value" id="spec-l2">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">L3 Cache</span
+                            ><span class="spec-value" id="spec-l3">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Virtualization</span
+                            ><span class="spec-value" id="spec-virt">-</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="processes-section glass-panel">
+                    <h2>Top Memory-Consuming Processes</h2>
+                    <div class="table-container">
+                        <table class="processes-table">
+                            <thead>
+                                <tr>
+                                    <th>PID</th>
+                                    <th>Process Name</th>
+                                    <th>Memory (MB)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="processes-body">
+                                <!-- Rows injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
