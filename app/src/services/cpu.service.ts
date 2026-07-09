@@ -42,6 +42,7 @@ export const getStaticCpuInfo = async (): Promise<CpuStaticData | null> => {
 
   const cpuStaticInfo: CpuStaticData = {
     ...parsed,
+    cpuModel,
     numberOfLogicalProcessors,
     cpuBaseSpeed: `${Number(cpuBaseSpeed) / 1000} Ghz`,
     L1CacheSize: `${Number(parsed.InstalledSize ?? 0)} KB`,
