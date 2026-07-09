@@ -6,3 +6,5 @@ export {
 } from './cpu.service';
 
 export { getMemoryInformation } from './memory.service';
+
+export { getTopProcesses } from './processes.service';
