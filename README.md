@@ -20,9 +20,9 @@ A aplicação coleta informações e métricas de hardware da máquina host em t
 ### Sistema (`/api/v1/system`)
 - `GET /stream`: Rota de fluxo contínuo (Server-Sent Events - SSE) que transmite em tempo real o uso de CPU, Memória, Uptime e a lista dos **30 processos que mais consomem memória** na máquina.
 
-## 🖥️ Dashboard (Frontend)
+## Dashboard (Frontend)
 
-O projeto inclui um painel visual limpo servido estaticamente na rota `/` (arquivos na pasta `/public`). Ele utiliza um design **Premium Dark Mode com Glassmorphism** e se conecta via EventSource para atualizar as estatísticas em tempo real, sem necessidade de frameworks pesados.
+O projeto inclui um painel visual limpo servido estaticamente na rota `/` (arquivos na pasta `/public`). Ele se conecta via EventSource para atualizar as estatísticas em tempo real, sem necessidade de frameworks pesados.
 
 ## Tecnologias Utilizadas
 
