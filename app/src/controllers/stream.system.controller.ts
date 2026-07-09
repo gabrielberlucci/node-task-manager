@@ -3,6 +3,7 @@ import {
   getCpuUsage,
   getCpuTotalProcesses,
   getMemoryInformation,
+  getTopProcesses,
 } from '@/services';
 import type { Request, Response } from 'express';
 
@@ -26,14 +27,22 @@ export const getSysInfoStreamController = async (
   while (isClientConnected) {
     const cpuLoad = await getCpuUsage();
     const memory = getMemoryInformation();
-    const processesInfo = await getCpuTotalProcesses();
     const sysUptime = getCpuUptime();
+
+    const [totalProcesses, processes] = await Promise.all([
+      getCpuTotalProcesses(),
+      getTopProcesses(),
+    ]);
+
+    // const processesInfo = await getCpuTotalProcesses();
+    // const processes = await getTopProcesses();
 
     const payload = {
       cpu: cpuLoad,
       memory: memory,
-      processes: processesInfo,
+      totalProcesses: totalProcesses,
       uptime: sysUptime,
+      processes: processes,
     };
 
     res.write(`data: ${JSON.stringify(payload)}\n\n`);
