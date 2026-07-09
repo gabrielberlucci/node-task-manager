@@ -1,8 +1,10 @@
-# Task Manager API
+# Task Manager API & Dashboard
 
-Uma API backend para monitoramento de sistema (System Monitor) construída com Node.js, Express e TypeScript. 
+![System Monitor Dashboard Preview](./app/public/preview.png)
 
-A aplicação coleta informações e métricas de hardware da máquina host, como dados da CPU (velocidade, cache, processos) e Memória RAM. Por utilizar comandos do PowerShell para certas coletas, ela funciona somente para o sistema operacional **Windows**.
+Uma aplicação de monitoramento de sistema (System Monitor) construída com Node.js, Express e TypeScript no backend, acompanhada de um **Dashboard Frontend** moderno feito em Vanilla JS, HTML e CSS.
+
+A aplicação coleta informações e métricas de hardware da máquina host em tempo real, como dados da CPU (velocidade, cache, processos) e Memória RAM. Por utilizar comandos do PowerShell para certas coletas, ela funciona somente para o sistema operacional **Windows**.
 
 ## Funcionalidades e Rotas (API REST)
 
@@ -16,7 +18,11 @@ A aplicação coleta informações e métricas de hardware da máquina host, com
 - `GET /info`: Retorna o total de memória RAM instalada, a quantidade livre (em GB) e a porcentagem de uso.
 
 ### Sistema (`/api/v1/system`)
-- `GET /stream`: Rota preparada (Server-Sent Events - SSE) para transmitir informações do sistema de forma contínua.
+- `GET /stream`: Rota de fluxo contínuo (Server-Sent Events - SSE) que transmite em tempo real o uso de CPU, Memória, Uptime e a lista dos **30 processos que mais consomem memória** na máquina.
+
+## 🖥️ Dashboard (Frontend)
+
+O projeto inclui um painel visual limpo servido estaticamente na rota `/` (arquivos na pasta `/public`). Ele utiliza um design **Premium Dark Mode com Glassmorphism** e se conecta via EventSource para atualizar as estatísticas em tempo real, sem necessidade de frameworks pesados.
 
 ## Tecnologias Utilizadas
 
@@ -31,6 +37,7 @@ A aplicação coleta informações e métricas de hardware da máquina host, com
 
 ```text
 /app
+├── /public            # Arquivos do Dashboard Frontend (index.html, styles.css, script.js)
 ├── /src
 │   ├── /controllers   # Intermediários entre as rotas e os serviços
 │   ├── /errors        # Classes de tratamento de erros customizados (ex: HardwareInfoError)
